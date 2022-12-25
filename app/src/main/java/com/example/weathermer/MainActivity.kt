@@ -1,6 +1,5 @@
 package com.example.weathermer
 
-import android.app.DownloadManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +7,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.weathermer.databinding.ActivityMainBinding
+import com.example.weathermer.fragments.MainFragment
 import org.json.JSONObject
 
 const val API_KEY = "8995eaf91b534d3a886154816222412"
@@ -20,9 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.button.setOnClickListener {
-            getData("Moscow")
-        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragments_container, MainFragment.newInstance())
+            .commit()
     }
 
     private fun getData(name: String){
